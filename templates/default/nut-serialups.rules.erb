@@ -1,0 +1,3 @@
+<% node['nut']['devices'].each do |dev| %>
+KERNEL=="<%= dev %>",GROUP="nut"
+<% end %>
