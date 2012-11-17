@@ -59,35 +59,35 @@ NOTIFYMSG NOCOMM <%= node['nut']['notifications']['no_communication']['message']
 NOTIFYMSG NOPARENT <%= node['nut']['notifications']['no_parent']['message'] %>
 <% end %>
 
-<% unless node['nut']['notifications']['onilne']['message'].nil? %>
-NOTIFYFLAG ONLINE <%= node['nut']['notification']['onilne']['message'] %>
+<% unless node['nut']['notifications']['onilne']['flags'].nil? %>
+NOTIFYFLAG ONLINE <%= node['nut']['notification']['onilne']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['on_battery']['message'].nil? %>
-NOTIFYFLAG ONBATT <%= node['nut']['notifications']['on_battery']['message'] %>
+<% unless node['nut']['notifications']['on_battery']['flags'].nil? %>
+NOTIFYFLAG ONBATT <%= node['nut']['notifications']['on_battery']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['low_battery']['message'].nil? %>
-NOTIFYFLAG LOWBATT <%= node['nut']['notifications']['low_battery']['message'] %>
+<% unless node['nut']['notifications']['low_battery']['flags'].nil? %>
+NOTIFYFLAG LOWBATT <%= node['nut']['notifications']['low_battery']['flags'] %>
 <% end %>
 <% unless node['nut']['notifications']['forced_shutdown']['message'].nil? %>
-NOTIFYFLAG FSD <%= node['nut']['notifications']['forced_shutdown']['message'] %>
+NOTIFYFLAG FSD <%= node['nut']['notifications']['forced_shutdown']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['communication_ok']['message'].nil? %>
-NOTIFYFLAG COMMOK <%= node['nut']['notifications']['communication_ok']['message'] %>
+<% unless node['nut']['notifications']['communication_ok']['flags'].nil? %>
+NOTIFYFLAG COMMOK <%= node['nut']['notifications']['communication_ok']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['communication_bad']['message'].nil? %>
-NOTIFYFLAG COMMBAD <%= node['nut']['notifications']['communication_bad']['message'] %>
+<% unless node['nut']['notifications']['communication_bad']['flags'].nil? %>
+NOTIFYFLAG COMMBAD <%= node['nut']['notifications']['communication_bad']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['shutdown']['message'].nil? %>
-NOTIFYFLAG SHUTDOWN <%= node['nut']['notifications']['shutdown']['message'] %>
+<% unless node['nut']['notifications']['shutdown']['flags'].nil? %>
+NOTIFYFLAG SHUTDOWN <%= node['nut']['notifications']['shutdown']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['replace_battery']['message'].nil? %>
-NOTIFYFLAG REPLBATT <%= node['nut']['notifications']['replace_battery']['message'] %>
+<% unless node['nut']['notifications']['replace_battery']['flags'].nil? %>
+NOTIFYFLAG REPLBATT <%= node['nut']['notifications']['replace_battery']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['no_communication']['message'].nil? %>
-NOTIFYFLAG NOCOMM <%= node['nut']['notifications']['no_communication']['message'] %>
+<% unless node['nut']['notifications']['no_communication']['flags'].nil? %>
+NOTIFYFLAG NOCOMM <%= node['nut']['notifications']['no_communication']['flags'] %>
 <% end %>
-<% unless node['nut']['notifications']['no_parent']['message'].nil? %>
-NOTIFYFLAG NOPARENT <%= node['nut']['notifications']['no_parent']['message'] %>
+<% unless node['nut']['notifications']['no_parent']['flags'].nil? %>
+NOTIFYFLAG NOPARENT <%= node['nut']['notifications']['no_parent']['flags'] %>
 <% end %>
 
 RBWARNTIME <%= node['nut']['replace_battery_warning_time'] %>
