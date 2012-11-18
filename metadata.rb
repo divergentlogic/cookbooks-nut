@@ -23,7 +23,7 @@ maintainer_email "clarry@divergentlogic.com"
 license          "Apache 2.0"
 description      "Installs/Configures Network UPS Tools"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.1"
+version          "0.0.2"
 recipe           "nut", "Default recipe"
 
 %w(debian ubuntu).each do |os|
@@ -44,17 +44,17 @@ attribute "nut/ups",
     :display_name => "UPS List",
     :description => "The UPS driver settings",
     :default =>  'none'
-    
+
 attribute "nut/users",
     :display_name => "User List",
     :description => "List of various users",
     :default =>  'none'
-    
+
 attribute "nut/monitors",
     :display_name => "Monitor List",
     :description => "List of systems you want to monitor",
     :default =>  'none'
-    
+
 attribute "nut/min_supplies",
     :display_name => "Minimal Supplies",
     :description => "The number of power supplies that must be receiving power to keep this system running",
@@ -64,7 +64,7 @@ attribute "nut/shutdown_command",
     :display_name => "Shutdown Command",
     :description => "This command is ran when the system needs to be brought down",
     :default =>  "/sbin/shutdown -h +0"
-    
+
 attribute "nut/notify_command",
     :display_name => "Notify Command",
     :description => "This command is ran when to send messages when things happen",
@@ -99,7 +99,7 @@ attribute "nut/notifications/onilne/message",
     :display_name => "Online Message",
     :description => "Change messages sent by upsmon when UPS is back online",
     :default =>  'none'
-    
+
 attribute "nut/notifications/on_battery/message",
     :display_name => "On Battery Message",
     :description => "Change messages sent by upsmon when USP is on battery",
@@ -109,7 +109,7 @@ attribute "nut/notifications/low_battery/message",
     :display_name => "Low Battery Message",
     :description => "Change messages sent by upsmon when UPS has a low battery",
     :default =>  'none'
-    
+
 attribute "nut/notifications/forced_shutdown/message",
     :display_name => "Forced Shutdown Message",
     :description => "Change messages sent by upsmon when USP is being shutdown by the master",
@@ -159,57 +159,57 @@ attribute "nut/notifications/low_battery/flags",
     :display_name => "Low Battery Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-        
+
 attribute "nut/notifications/forced_shutdown/flags",
     :display_name => "Forced Shutdown Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-  
+
 attribute "nut/notifications/communication_ok/flags",
     :display_name => "Communication Ok Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/notifications/communication_bad/flags",
     :display_name => "Communication Lost Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/notifications/shutdown/flags",
     :display_name => "Shutdown Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/notifications/replace_battery/flags",
     :display_name => "Replace Battery Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/notifications/no_communication/flags",
     :display_name => "No Communication Flag",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/notifications/no_parent/flags",
     :display_name => "No Parent Message",
     :description => "Configured where notificaiton are posted ",
     :default =>  'none'
-    
+
 attribute "nut/replace_battery_warning_time",
     :display_name => "Replace Battery Warning Time",
     :description => "Replace Battery Warning Time in seconds",
     :default =>  "43200"
-    
+
 attribute "nut/no_communications_warning_time",
     :display_name => "No Communication Warning Time",
     :description => "No Communication Warning Time in seconds",
     :default =>  "300"
-    
+
 attribute "nut/final_delay",
     :display_name => "Final Delay",
     :description => "Last sleep interval before shutting down the system",
     :default =>  "5"
-    
+
 attribute "nut/run_as_user",
     :display_name => "Monitor user",
     :description => "Run the monitor service as another user",
