@@ -263,16 +263,16 @@ default['nut']['notifications']['no_parent']['message'] = nil
 # IGNORE - Don't do anything
 #
 # If you use IGNORE, don't use any other flags on the same line.
-default['nut']['notifications']['onilne']['flags'] = nil
-default['nut']['notifications']['on_battery']['flags'] = nil
-default['nut']['notifications']['low_battery']['flags'] = nil
-default['nut']['notifications']['forced_shutdown']['flags'] = nil
-default['nut']['notifications']['communication_ok']['flags'] = nil
-default['nut']['notifications']['communication_bad']['flags'] = nil
-default['nut']['notifications']['shutdown']['flags'] = nil
-default['nut']['notifications']['replace_battery']['flags'] = nil
-default['nut']['notifications']['no_communication']['flags'] = nil
-default['nut']['notifications']['no_parent']['flags'] = nil
+default['nut']['notifications']['onilne']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['on_battery']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['low_battery']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['forced_shutdown']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['communication_ok']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['communication_bad']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['shutdown']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['replace_battery']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['no_communication']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['no_parent']['flags'] = "WALL+SYSLOG"
 
 # --------------------------------------------------------------------------
 # RBWARNTIME - replace battery warning time in seconds
