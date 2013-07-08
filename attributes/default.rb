@@ -225,7 +225,7 @@ default['nut']['power_down_flag'] = '/etc/killpower'
 # REPLBATT : The UPS battery is bad and needs to be replaced
 # NOCOMM   : A UPS is unavailable (can't be contacted for monitoring)
 # NOPARENT : The process that shuts down the system has died (shutdown impossible)
-default['nut']['notifications']['onilne']['message'] = nil
+default['nut']['notifications']['online']['message'] = nil
 default['nut']['notifications']['on_battery']['message'] = nil
 default['nut']['notifications']['low_battery']['message'] = nil
 default['nut']['notifications']['forced_shutdown']['message'] = nil
