@@ -28,8 +28,8 @@ DEADTIME <%= node['nut']['deadtime'] %>
 
 POWERDOWNFLAG <%= node['nut']['power_down_flag'] %>
 
-<% unless node['nut']['notifications']['onilne']['message'].nil? %>
-NOTIFYMSG ONLINE <%= node['nut']['notifications']['onilne']['message'] %>
+<% unless node['nut']['notifications']['online']['message'].nil? %>
+NOTIFYMSG ONLINE <%= node['nut']['notifications']['online']['message'] %>
 <% end %>
 <% unless node['nut']['notifications']['on_battery']['message'].nil? %>
 NOTIFYMSG ONBATT <%= node['nut']['notifications']['on_battery']['message'] %>
@@ -59,8 +59,8 @@ NOTIFYMSG NOCOMM <%= node['nut']['notifications']['no_communication']['message']
 NOTIFYMSG NOPARENT <%= node['nut']['notifications']['no_parent']['message'] %>
 <% end %>
 
-<% unless node['nut']['notifications']['onilne']['flags'].nil? %>
-NOTIFYFLAG ONLINE <%= node['nut']['notifications']['onilne']['flags'] %>
+<% unless node['nut']['notifications']['online']['flags'].nil? %>
+NOTIFYFLAG ONLINE <%= node['nut']['notification']['online']['flags'] %>
 <% end %>
 <% unless node['nut']['notifications']['on_battery']['flags'].nil? %>
 NOTIFYFLAG ONBATT <%= node['nut']['notifications']['on_battery']['flags'] %>
