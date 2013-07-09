@@ -18,6 +18,9 @@ Tested on:
 * Debian 6.0 (Squeeze)
 * Ubuntu 12.04 (Precise Penguin)
 
+Not supported:
+* Ubuntu 13.04
+
 # Attributes
 
 The main attributes are listed below. The complete list is documented in the metadata.rb and attributes/default.rb files included with the project.
@@ -53,7 +56,7 @@ Add the nut recipe to your run list.
 			"users": {
 				"vagrant": {
 					"password": "vagrant",
-					"upsmod master": true
+					"upsmon master": true
 				}
 			},
 
@@ -69,7 +72,13 @@ Add the nut recipe to your run list.
 
 		}
 	}
-	
+
+#### Note about users. 
+
+If user is SLAVE upsmon - then don't set node attribute node['nut']['users']['<USERNAME>']['upsmon master'] at all.
+
+"upsmon master": false IS INVALID attribute in attributes setup.
+
 ### Running inside vagrant
 
 First you'll need to install [Virtual Box](https://www.virtualbox.org/), [Vagrant](http://vagrantup.com/) and a UPS
