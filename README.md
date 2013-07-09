@@ -89,7 +89,13 @@ If you want upsd to listen to on other than 127.0.0.1 interface then use listen 
 
 #### Note about users. 
 
-If user is SLAVE upsmon - then don't set node attribute node['nut']['users']['<USERNAME>']['upsmon master'] at all.
+If upsmon process must run in SLAVE mode, then set node attribute follows:
+"users": {
+				"vagrant": {
+					"password": "vagrant",
+					"upsmon": "slave"
+				}
+			},
 
 "upsmon master": false IS INVALID attribute in attributes setup.
 
