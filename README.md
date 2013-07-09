@@ -73,6 +73,20 @@ Add the nut recipe to your run list.
 		}
 	}
 
+#### Note about listen ip addresses.
+
+If you want upsd to listen to on other than 127.0.0.1 interface then use listen attribute
+		"nut": {
+                    ...
+                            "listen": [
+                                    "127.0.0.1",
+                                    "192.168.128.1"
+                                  ],
+                    ...
+                        }
+
+
+
 #### Note about users. 
 
 If user is SLAVE upsmon - then don't set node attribute node['nut']['users']['<USERNAME>']['upsmon master'] at all.
