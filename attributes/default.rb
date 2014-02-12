@@ -351,7 +351,7 @@ default['nut']['state_path'] = nil
 #
 # This will only be read at startup of upsd.  If you make changes here,
 # you'll need to restart upsd, reload will have no effect.
-default['nut']['listen'] = nil
+default['nut']['listen'] = [ "127.0.0.1" ]
 
 # =======================================================================
 # MAXCONN <connections>

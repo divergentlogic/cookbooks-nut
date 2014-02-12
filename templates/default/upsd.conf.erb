@@ -9,7 +9,9 @@ STATEPATH = <%= node['nut']['state_path'] %>
 <% end %>
 
 <% unless node['nut']['listen'].nil? %>
-LISTEN = <%= node['nut']['listen'] %>
+<% node['nut']['listen'].each do |address| %>
+<%= "LISTEN #{address} 3493" %>
+<% end %>
 <% end %>
 
 <% unless node['nut']['max_connections'].nil? %>
