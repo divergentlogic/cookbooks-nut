@@ -18,6 +18,10 @@ Tested on:
 * Debian 6.0 (Squeeze)
 * Ubuntu 12.04 (Precise Penguin)
 
+Unsupported:
+
+* Ubuntu 13.04
+
 # Attributes
 
 The main attributes are listed below. The complete list is documented in the metadata.rb and attributes/default.rb files included with the project.
