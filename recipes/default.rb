@@ -24,6 +24,7 @@ package "nut"
 
 service "nut" do
   action [ :nothing ]
+  provider Chef::Provider::Service::Upstart
   supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
 end
 
