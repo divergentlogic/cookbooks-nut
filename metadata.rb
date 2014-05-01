@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+name		 "nut"
 maintainer       "Ceaser Larry"
 maintainer_email "clarry@divergentlogic.com"
 license          "Apache 2.0"
