@@ -22,9 +22,14 @@
 package "nut"
 # Precise creates the user and group called 'nut'
 
-service "nut" do
-  action [ :nothing ]
-  provider Chef::Provider::Service::Upstart
+service "nut-service" do
+  case node["platform_version"]
+  when "14.04"
+    service_name "nut-client"
+  else
+    service_name "nut"
+  end
+  action [ :enable, :start ]
   supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
 end
 
@@ -42,7 +47,7 @@ template "/etc/nut/nut.conf" do
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, 'service[nut]'
+  notifies :restart, 'service[nut-service]'
 end
 
 unless node['nut']['ups'].empty?
@@ -51,7 +56,7 @@ unless node['nut']['ups'].empty?
     owner "root"
     group "nut"
     mode 0640
-    notifies :reload, 'service[nut]'
+    notifies :reload, 'service[nut-service]'
   end
 end
 
@@ -60,7 +65,7 @@ template "/etc/nut/upsd.conf" do
   owner "root"
   group "nut"
   mode 0640
-  notifies :reload, 'service[nut]'
+  notifies :reload, 'service[nut-service]'
 end
 
 
@@ -76,6 +81,6 @@ template "/etc/nut/upsmon.conf" do
   owner "root"
   group "nut"
   mode 0640
-  notifies :reload, 'service[nut]'
+  notifies :reload, 'service[nut-service]'
 end
 
