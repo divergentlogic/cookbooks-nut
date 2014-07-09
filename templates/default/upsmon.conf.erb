@@ -60,7 +60,7 @@ NOTIFYMSG NOPARENT <%= node['nut']['notifications']['no_parent']['message'] %>
 <% end %>
 
 <% unless node['nut']['notifications']['online']['flags'].nil? %>
-NOTIFYFLAG ONLINE <%= node['nut']['notification']['online']['flags'] %>
+NOTIFYFLAG ONLINE <%= node['nut']['notifications']['online']['flags'] %>
 <% end %>
 <% unless node['nut']['notifications']['on_battery']['flags'].nil? %>
 NOTIFYFLAG ONBATT <%= node['nut']['notifications']['on_battery']['flags'] %>
