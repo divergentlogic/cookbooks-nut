@@ -96,7 +96,7 @@ attribute "nut/power_down_flag",
     :description => "Flag file for forcing UPS shutdown on the master system",
     :default =>  '/etc/killpower'
 
-attribute "nut/notifications/onilne/message",
+attribute "nut/notifications/online/message",
     :display_name => "Online Message",
     :description => "Change messages sent by upsmon when UPS is back online",
     :default =>  'none'

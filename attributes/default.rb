@@ -263,7 +263,7 @@ default['nut']['notifications']['no_parent']['message'] = nil
 # IGNORE - Don't do anything
 #
 # If you use IGNORE, don't use any other flags on the same line.
-default['nut']['notifications']['onilne']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['online']['flags'] = "WALL+SYSLOG"
 default['nut']['notifications']['on_battery']['flags'] = "WALL+SYSLOG"
 default['nut']['notifications']['low_battery']['flags'] = "WALL+SYSLOG"
 default['nut']['notifications']['forced_shutdown']['flags'] = "WALL+SYSLOG"
