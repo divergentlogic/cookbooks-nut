@@ -21,6 +21,7 @@
 
 package "nut"
 # Precise creates the user and group called 'nut'
+package "nut-snmp"
 
 service "nut-server" do
   case node["platform_version"]
@@ -29,7 +30,6 @@ service "nut-server" do
   else
     service_name "nut"
   end
-  action [ :enable, :start ]
   supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
 end
 
@@ -41,7 +41,6 @@ service "nut-client" do
   else
     service_name "nut"
   end
-  action [ :enable, :start ]
   supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
 end
 
@@ -107,4 +106,31 @@ template "/etc/nut/upsmon.conf" do
   mode 0640
   notifies :reload, 'service[nut-client]'
 end
+
+# Starting service correspond to nut.conf mode
+case node['nut']['mode']
+
+  when "netserver"
+    unless node['nut']['monitors'].nil?
+      service "nut-client" do
+        action [ :enable, :start ]
+      end
+    end
+  service "nut-server" do
+    action [ :enable, :start ]
+  end
+
+  when "netclient"
+    service "nut-client" do
+      action [ :enable, :start ]
+    end
+
+  when "standalone"
+    service "nut-client" do
+      action [ :enable, :start ]
+    end
+    service "nut-server" do
+      action [ :enable, :start ]
+    end
+  end
 
