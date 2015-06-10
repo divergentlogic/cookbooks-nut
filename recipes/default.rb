@@ -22,7 +22,19 @@
 package "nut"
 # Precise creates the user and group called 'nut'
 
-service "nut-service" do
+service "nut-server" do
+  case node["platform_version"]
+  when "14.04"
+    service_name "nut-server"
+  else
+    service_name "nut"
+  end
+  action [ :enable, :start ]
+  supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
+end
+
+
+service "nut-client" do
   case node["platform_version"]
   when "14.04"
     service_name "nut-client"
@@ -47,7 +59,18 @@ template "/etc/nut/nut.conf" do
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, 'service[nut-service]'
+  case node['nut']['mode']
+  when "netserver"
+    unless node['nut']['monitors'].nil?
+      notifies :restart, 'service[nut-client]'
+    end
+    notifies :restart, 'service[nut-server]'
+  when "netclient"
+    notifies :restart, 'service[nut-client]'
+  when "standalone"
+    notifies :restart, 'service[nut-client]'
+    notifies :restart, 'service[nut-server]'
+  end
 end
 
 unless node['nut']['ups'].empty?
@@ -56,7 +79,7 @@ unless node['nut']['ups'].empty?
     owner "root"
     group "nut"
     mode 0640
-    notifies :reload, 'service[nut-service]'
+    notifies :reload, 'service[nut-server]'
   end
 end
 
@@ -65,7 +88,7 @@ template "/etc/nut/upsd.conf" do
   owner "root"
   group "nut"
   mode 0640
-  notifies :reload, 'service[nut-service]'
+  notifies :reload, 'service[nut-server]'
 end
 
 
@@ -74,6 +97,7 @@ template "/etc/nut/upsd.users" do
   owner "root"
   group "nut"
   mode 0640
+  notifies :reload, 'service[nut-server]'
 end
 
 template "/etc/nut/upsmon.conf" do
@@ -81,6 +105,6 @@ template "/etc/nut/upsmon.conf" do
   owner "root"
   group "nut"
   mode 0640
-  notifies :reload, 'service[nut-service]'
+  notifies :reload, 'service[nut-client]'
 end
 
