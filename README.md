@@ -6,7 +6,7 @@ Installs and configures Network UPS Tools.
 
 # Requirements
 
-* Chef 0.10.10+.
+* Chef 12.3.0
 
 ## Platform
 
@@ -15,8 +15,8 @@ Installs and configures Network UPS Tools.
 
 Tested on:
 
-* Debian 6.0 (Squeeze)
 * Ubuntu 12.04 (Precise Penguin)
+* Ubuntu 14.04 (Trusty Tahr)
 
 Unsupported:
 
@@ -39,12 +39,12 @@ Add the nut recipe to your run list.
 
 ##### Using knife to add nut to the run list
 	knife node run_list add [NODE] 'recipe[nut]'
-	
+
 ##### Basic Node Structure
 	{
 		"nut": {
 			"mode": "standalone",
-	
+
 			"devices": ["ttyS0"],
 
 			"ups": {
@@ -92,7 +92,7 @@ Override this attribute in a role or environment.
 
 
 
-#### Note about users. 
+#### Note about users.
 
 If upsmon process must run in SLAVE mode, then set node attribute follows:
 "users": {
@@ -105,13 +105,11 @@ If upsmon process must run in SLAVE mode, then set node attribute follows:
 "upsmon master": false IS INVALID attribute in attributes setup.
 
 ### Running inside vagrant
+	First you'll need to install [Virtual Box](https://www.virtualbox.org/), [Vagrant](http://vagrantup.com/) and a UPS
 
-First you'll need to install [Virtual Box](https://www.virtualbox.org/), [Vagrant](http://vagrantup.com/) and a UPS
+##### Create the cookbooks folder.
+	mkdir cookbook && ln -s `pwd` cookbooks/nut
 
-##### Create the cookbook directory
-	 [ -s cookbooks/nut ] || (mkdir cookbooks && ln -s /vagrant cookbooks/nut)
-	
 ##### Start Vagrant
-	vagrant up
-	
-	
+	vagrant up [precise|trusty]
+

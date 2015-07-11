@@ -1,3 +1,4 @@
 cookbook
 /.vagrant
 metadata.json
+/cookbooks

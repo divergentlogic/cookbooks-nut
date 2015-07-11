@@ -1,20 +1,50 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  config.vm.define :squeeze do |squeeze_config|
-    squeeze_config.vm.box = "squeeze"
-    squeeze_config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box"
+Vagrant::configure(2) do |config|
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  if Vagrant.has_plugin?("vagrant-omnibus")
+    config.omnibus.chef_version = "12.3.0"
+  end
+
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.gui = true
+    virtualbox.memory = 1024
+    virtualbox.cpus = 2
+  end
+
+  config.vm.provider :parallels do |parallels|
+    parallels.guest_tools = true
+    parallels.memory = 1024
+    parallels.cpus = 2
+  end
+
+  config.vm.define :trusty do |trusty_config|
+    trusty_config.vm.box = "ubuntu/trusty64"
+    trusty_config.vm.define :trusty do |trusty_config|
+      override.vm.box = "parallels/ubuntu-14.04"
+    end
   end
 
   config.vm.define :precise do |precise_config|
-    precise_config.vm.box = "precise"
-    precise_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    precise_config.vm.box = "ubuntu/precise64"
+    precise_config.vm.provider :parallels do |v, override|
+      override.vm.box = "puphpet/ubuntu1204-x64"
+    end
+  end
+
+  config.vm.define :jessie do |jessie_config|
+    jessie_config.vm.box = "debian/jessie64"
+    jessie_config.vm.provider :parallels do |v, override|
+      override.vm.box = "ffuenf/debian-8.0.0-amd64"
+    end
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks"]
-    chef.add_recipe "nut"
     chef.json = {
     	"nut" => {
     	  "mode" => "standalone",
@@ -22,10 +52,16 @@ Vagrant::Config.run do |config|
     	  "devices" => ["ttyS0"],
 
     	  "ups" => {
-    	    'cyberpower' => {
-    	      "driver" => "powerpanel",
-            "port" => "/dev/ttyS0",
-            "desc" => "Cyberpower CP1500AVR"
+    	    # 'cyberpower' => {
+    	    #   "driver" => "powerpanel",
+          #   "port" => "/dev/ttyS0",
+          #   "desc" => "Cyberpower CP1500AVR"
+          # }
+
+          'apc' => {
+    	      "driver" => "usbhid-ups",
+            "port" => "auto",
+            "desc" => "Back-UPS XS 1500"
           }
         },
 
@@ -37,8 +73,17 @@ Vagrant::Config.run do |config|
         },
 
         "monitors" => {
-          "cyberpower" => {
-            "system" => "cyberpower@localhost",
+          # "cyberpower" => {
+          #   "system" => "cyberpower@localhost",
+          #   "power_value" => 1,
+
+          #   "username" => "vagrant",
+          #   "password" => "vagrant",
+          #   "role" => "master"
+          # }
+
+          "apc" => {
+            "system" => "apc@localhost",
             "power_value" => 1,
 
             "username" => "vagrant",
@@ -49,5 +94,7 @@ Vagrant::Config.run do |config|
 
       }
     }
+
+    chef.run_list = ["nut::default"]
    end
 end
