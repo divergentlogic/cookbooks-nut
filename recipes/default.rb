@@ -44,13 +44,12 @@ service "nut-client" do
   supports :start => true, :stop => true, :reload => true, :restart => true, :status => true
 end
 
-unless node['nut']['devices'].empty?
-  template "/etc/udev/rules.d/53-nut-serialups.rules" do
-    source "nut-serialups.rules.erb"
-    owner "root"
-    group "root"
-    mode 0644
-  end
+template "/etc/udev/rules.d/53-nut-serialups.rules" do
+  source "nut-serialups.rules.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  not_if { node['nut']['devices'].empty? }
 end
 
 template "/etc/nut/nut.conf" do
@@ -72,14 +71,13 @@ template "/etc/nut/nut.conf" do
   end
 end
 
-unless node['nut']['ups'].empty?
-  template "/etc/nut/ups.conf" do
-    source "ups.conf.erb"
-    owner "root"
-    group "nut"
-    mode 0640
-    notifies :reload, 'service[nut-server]'
-  end
+template "/etc/nut/ups.conf" do
+  source "ups.conf.erb"
+  owner "root"
+  group "nut"
+  mode 0640
+  notifies :reload, 'service[nut-server]'
+  not_if { node['nut']['ups'].empty? }
 end
 
 template "/etc/nut/upsd.conf" do
@@ -111,14 +109,13 @@ end
 case node['nut']['mode']
 
   when "netserver"
-    unless node['nut']['monitors'].nil?
-      service "nut-client" do
-        action [ :enable, :start ]
-      end
+    service "nut-client" do
+      action [ :enable, :start ]
+      not_if { node['nut']['monitors'].nil? }
     end
-  service "nut-server" do
-    action [ :enable, :start ]
-  end
+    service "nut-server" do
+      action [ :enable, :start ]
+    end
 
   when "netclient"
     service "nut-client" do
