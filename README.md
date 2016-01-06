@@ -26,7 +26,7 @@ Unsupported:
 
 The main attributes are listed below. The complete list is documented in the metadata.rb and attributes/default.rb files included with the project.
 
-* `node['nut']['mode']` - The mode determines which parts of NUT is to be started.
+* `node['nut']['mode']` - The mode determines which parts of NUT is to be started (`netserver` for the network server, `netclient` for a client that connects to the network server, `standalone` for running a standalone install)
 * `node['nut']['devices']` - Serial devices to change to the NUT group
 * `node['nut']['ups']` - The driver settings for your UPS
 * `node['nut']['users']` - Determines user access control, authentication and roles
