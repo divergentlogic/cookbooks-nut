@@ -24,8 +24,7 @@ package "nut"
 package "nut-snmp"
 
 service "nut-server" do
-  case node["platform_version"]
-  when "14.04"
+  if node["platform_version"].to_f >= 14.04
     service_name "nut-server"
   else
     service_name "nut"
@@ -35,8 +34,7 @@ end
 
 
 service "nut-client" do
-  case node["platform_version"]
-  when "14.04"
+  if node["platform_version"].to_f >= 14.04
     service_name "nut-client"
   else
     service_name "nut"
@@ -130,4 +128,3 @@ case node['nut']['mode']
       action [ :enable, :start ]
     end
   end
-
