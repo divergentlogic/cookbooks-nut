@@ -11,6 +11,9 @@ recipe           "nut", "Default recipe"
   supports os
 end
 
+source_url 'https://github.com/divergentlogic/cookbooks-nut' if respond_to?(:source_url)
+issues_url 'https://github.com/divergentlogic/cookbooks-nut/issues' if respond_to?(:issues_url)
+
 attribute "nut/mode",
     :display_name => "Startup mode",
     :description => "The mode determines which parts of NUT is to be started",
