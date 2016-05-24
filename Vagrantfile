@@ -1,14 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::configure(2) do |config|
+Vagrant.configure(2) do |config|
+  config.cache.scope = :box if Vagrant.has_plugin?('vagrant-cachier')
 
-  if Vagrant.has_plugin?("vagrant-cachier")
-    config.cache.scope = :box
-  end
-
-  if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = "12.3.0"
+  if Vagrant.has_plugin?('vagrant-omnibus')
+    config.omnibus.chef_version = '12.3.0'
   end
 
   config.vm.provider :virtualbox do |virtualbox|
@@ -24,55 +21,55 @@ Vagrant::configure(2) do |config|
   end
 
   config.vm.define :trusty do |trusty_config|
-    trusty_config.vm.box = "ubuntu/trusty64"
-    trusty_config.vm.define :trusty do |trusty_config|
-      override.vm.box = "parallels/ubuntu-14.04"
+    trusty_config.vm.box = 'ubuntu/trusty64'
+    trusty_config.vm.define :trusty do |_trusty_config|
+      override.vm.box = 'parallels/ubuntu-14.04'
     end
   end
 
   config.vm.define :precise do |precise_config|
-    precise_config.vm.box = "ubuntu/precise64"
-    precise_config.vm.provider :parallels do |v, override|
-      override.vm.box = "puphpet/ubuntu1204-x64"
+    precise_config.vm.box = 'ubuntu/precise64'
+    precise_config.vm.provider :parallels do |_v, override|
+      override.vm.box = 'puphpet/ubuntu1204-x64'
     end
   end
 
   config.vm.define :jessie do |jessie_config|
-    jessie_config.vm.box = "debian/jessie64"
-    jessie_config.vm.provider :parallels do |v, override|
-      override.vm.box = "ffuenf/debian-8.0.0-amd64"
+    jessie_config.vm.box = 'debian/jessie64'
+    jessie_config.vm.provider :parallels do |_v, override|
+      override.vm.box = 'ffuenf/debian-8.0.0-amd64'
     end
   end
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-    	"nut" => {
-    	  "mode" => "standalone",
+      'nut' => {
+        'mode' => 'standalone',
 
-    	  "devices" => ["ttyS0"],
+        'devices' => ['ttyS0'],
 
-    	  "ups" => {
-    	    # 'cyberpower' => {
-    	    #   "driver" => "powerpanel",
+        'ups' => {
+          # 'cyberpower' => {
+          #   "driver" => "powerpanel",
           #   "port" => "/dev/ttyS0",
           #   "desc" => "Cyberpower CP1500AVR"
           # }
 
           'apc' => {
-    	      "driver" => "usbhid-ups",
-            "port" => "auto",
-            "desc" => "Back-UPS XS 1500"
+            'driver' => 'usbhid-ups',
+            'port' => 'auto',
+            'desc' => 'Back-UPS XS 1500'
           }
         },
 
-        "users" => {
-          "vagrant" => {
-            "password" => "vagrant",
-            "upsmod master" => true
+        'users' => {
+          'vagrant' => {
+            'password' => 'vagrant',
+            'upsmod master' => true
           }
         },
 
-        "monitors" => {
+        'monitors' => {
           # "cyberpower" => {
           #   "system" => "cyberpower@localhost",
           #   "power_value" => 1,
@@ -82,19 +79,19 @@ Vagrant::configure(2) do |config|
           #   "role" => "master"
           # }
 
-          "apc" => {
-            "system" => "apc@localhost",
-            "power_value" => 1,
+          'apc' => {
+            'system' => 'apc@localhost',
+            'power_value' => 1,
 
-            "username" => "vagrant",
-            "password" => "vagrant",
-            "role" => "master"
+            'username' => 'vagrant',
+            'password' => 'vagrant',
+            'role' => 'master'
           }
         }
 
       }
     }
 
-    chef.run_list = ["nut::default"]
-   end
+    chef.run_list = ['nut::default']
+  end
 end

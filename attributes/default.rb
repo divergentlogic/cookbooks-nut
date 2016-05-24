@@ -87,7 +87,7 @@ default['nut']['monitors'] = {}
 #   # <system> is a UPS identifier in the form <upsname>@<hostname>[:<port>]
 #   # like ups@localhost, su700@mybox, etc.
 #   "system" => "cyberpower@localhost",
-#   
+#
 #   # <powervalue> is an integer - the number of power supplies that this UPS
 #   # feeds on this system.  Most computers only have one power supply, so this
 #   # is normally set to 1.  You need a pretty big or special box to have any
@@ -98,7 +98,7 @@ default['nut']['monitors'] = {}
 #   # changes for a given UPS without shutting down when it goes critical,
 #   # unless <powervalue> is 0.
 #   "power_value" => 1,
-#   
+#
 #   "username" => "admin",
 #   "password" => "",
 #   "role" => "master"
@@ -119,7 +119,7 @@ default['nut']['monitors'] = {}
 default['nut']['min_supplies'] = 1
 
 # upsmon runs this command when the system needs to be brought down.
-default['nut']['shutdown_command'] = "/sbin/shutdown -h +0"
+default['nut']['shutdown_command'] = '/sbin/shutdown -h +0'
 
 # upsmon calls this to send messages when things happen
 #
@@ -263,16 +263,16 @@ default['nut']['notifications']['no_parent']['message'] = nil
 # IGNORE - Don't do anything
 #
 # If you use IGNORE, don't use any other flags on the same line.
-default['nut']['notifications']['online']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['on_battery']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['low_battery']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['forced_shutdown']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['communication_ok']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['communication_bad']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['shutdown']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['replace_battery']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['no_communication']['flags'] = "WALL+SYSLOG"
-default['nut']['notifications']['no_parent']['flags'] = "WALL+SYSLOG"
+default['nut']['notifications']['online']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['on_battery']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['low_battery']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['forced_shutdown']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['communication_ok']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['communication_bad']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['shutdown']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['replace_battery']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['no_communication']['flags'] = 'WALL+SYSLOG'
+default['nut']['notifications']['no_parent']['flags'] = 'WALL+SYSLOG'
 
 # --------------------------------------------------------------------------
 # RBWARNTIME - replace battery warning time in seconds
@@ -283,7 +283,7 @@ default['nut']['notifications']['no_parent']['flags'] = "WALL+SYSLOG"
 # you've defined above.
 #
 # If this number is not to your liking, override it here.
-default['nut']['replace_battery_warning_time'] = 43200
+default['nut']['replace_battery_warning_time'] = 43_200
 
 # --------------------------------------------------------------------------
 # NOCOMMWARNTIME - no communications warning time in seconds
@@ -351,7 +351,7 @@ default['nut']['state_path'] = nil
 #
 # This will only be read at startup of upsd.  If you make changes here,
 # you'll need to restart upsd, reload will have no effect.
-default['nut']['listen'] = [ "127.0.0.1" ]
+default['nut']['listen'] = ['127.0.0.1']
 
 # =======================================================================
 # MAXCONN <connections>
