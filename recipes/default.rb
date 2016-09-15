@@ -103,29 +103,72 @@ end
 case node['nut']['mode']
 
 when 'netserver'
-  service 'client' do
-    service_name 'nut-client'
-    action [:enable, :start]
-    not_if { node['nut']['monitors'].nil? }
-  end
-  service 'server' do
-    service_name 'nut-server'
-    action [:enable, :start]
+
+  control_group 'netserver' do
+    control 'netserver' do
+
+      # nut-client
+      it 'should be enabled' do
+          expect(service('nut-client')).to be_enabled
+          not_if { node['nut']['monitors'].nil? }
+      end
+  
+      it 'should be running' do
+        expect(service('nut-client')).to be_running
+      end
+
+      # nut-server
+      it 'should be enabled' do
+          expect(service('nut-server')).to be_enabled
+      end
+
+      it 'should be running' do
+        expect(service('nut-server')).to be_running
+      end
+
+    end
   end
 
+
 when 'netclient'
-  service 'client' do
-    service_name 'nut-client'
-    action [:enable, :start]
+
+  control_group 'netclient' do
+    control 'netclient' do
+
+      # nut-client
+      it 'should be enabled' do
+          expect(service('nut-client')).to be_enabled
+      end
+
+      it 'should be running' do
+        expect(service('nut-client')).to be_running
+      end
+
+    end
   end
 
 when 'standalone'
-  service 'client' do
-    service_name 'nut-client'
-    action [:enable, :start]
+
+  control_group 'standalone' do
+    control 'standalone' do
+
+      # nut-client
+      it 'should be enabled' do
+          expect(service('nut-client')).to be_enabled
+      end
+      it 'should be running' do
+        expect(service('nut-client')).to be_running
+      end
+
+      # nut-server
+      it 'should be enabled' do
+          expect(service('nut-server')).to be_enabled
+      end
+      it 'should be running' do
+        expect(service('nut-server')).to be_running
+      end
+
+    end
   end
-  service 'server' do
-    service_name 'nut-server'
-    action [:enable, :start]
-  end
+
 end
