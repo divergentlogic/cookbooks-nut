@@ -104,71 +104,53 @@ case node['nut']['mode']
 
 when 'netserver'
 
-  control_group 'netserver' do
-    control 'netserver' do
-
-      # nut-client
-      it 'should be enabled' do
-          expect(service('nut-client')).to be_enabled
-          not_if { node['nut']['monitors'].nil? }
-      end
-  
-      it 'should be running' do
-        expect(service('nut-client')).to be_running
-      end
-
-      # nut-server
-      it 'should be enabled' do
-          expect(service('nut-server')).to be_enabled
-      end
-
-      it 'should be running' do
-        expect(service('nut-server')).to be_running
-      end
-
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
     end
+    action [:enable, :start]
+    not_if { node['nut']['monitors'].nil? }
+  end
+  service 'server' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-server'
+    else
+      service_name 'nut'
+    end
+    action [:enable, :start]
   end
 
 
 when 'netclient'
 
-  control_group 'netclient' do
-    control 'netclient' do
-
-      # nut-client
-      it 'should be enabled' do
-          expect(service('nut-client')).to be_enabled
-      end
-
-      it 'should be running' do
-        expect(service('nut-client')).to be_running
-      end
-
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
     end
+    action [:enable, :start]
   end
 
 when 'standalone'
 
-  control_group 'standalone' do
-    control 'standalone' do
-
-      # nut-client
-      it 'should be enabled' do
-          expect(service('nut-client')).to be_enabled
-      end
-      it 'should be running' do
-        expect(service('nut-client')).to be_running
-      end
-
-      # nut-server
-      it 'should be enabled' do
-          expect(service('nut-server')).to be_enabled
-      end
-      it 'should be running' do
-        expect(service('nut-server')).to be_running
-      end
-
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
     end
+    action [:enable, :start]
+  end
+  service 'server' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-server'
+    else
+      service_name 'nut'
+    end
+    action [:enable, :start]
   end
 
 end
