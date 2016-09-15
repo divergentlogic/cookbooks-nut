@@ -103,24 +103,29 @@ end
 case node['nut']['mode']
 
 when 'netserver'
-  service 'nut-client' do
+  service 'client' do
+    service_name 'nut-client'
     action [:enable, :start]
     not_if { node['nut']['monitors'].nil? }
   end
-  service 'nut-server' do
+  service 'server' do
+    service_name 'nut-server'
     action [:enable, :start]
   end
 
 when 'netclient'
-  service 'nut-client' do
+  service 'client' do
+    service_name 'nut-client'
     action [:enable, :start]
   end
 
 when 'standalone'
-  service 'nut-client' do
+  service 'client' do
+    service_name 'nut-client'
     action [:enable, :start]
   end
-  service 'nut-server' do
+  service 'server' do
+    service_name 'nut-server'
     action [:enable, :start]
   end
 end
