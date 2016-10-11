@@ -103,24 +103,54 @@ end
 case node['nut']['mode']
 
 when 'netserver'
-  service 'nut-client' do
+
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
+    end
     action [:enable, :start]
     not_if { node['nut']['monitors'].nil? }
   end
-  service 'nut-server' do
+  service 'server' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-server'
+    else
+      service_name 'nut'
+    end
     action [:enable, :start]
   end
 
+
 when 'netclient'
-  service 'nut-client' do
+
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
+    end
     action [:enable, :start]
   end
 
 when 'standalone'
-  service 'nut-client' do
+
+  service 'client' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-client'
+    else
+      service_name 'nut'
+    end
     action [:enable, :start]
   end
-  service 'nut-server' do
+  service 'server' do
+    if node['platform_version'].to_f >= 14.04
+      service_name 'nut-server'
+    else
+      service_name 'nut'
+    end
     action [:enable, :start]
   end
+
 end
